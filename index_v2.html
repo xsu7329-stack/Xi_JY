@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover">
+    <title>西极协议 · 八门铁律</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,500;14..32,600;14..32,700;14..32,800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            background: #000000;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            color: #ffffff;
+            min-height: 100vh;
+        }
+
+        .app {
+            max-width: 420px;
+            margin: 0 auto;
+            padding: 12px 16px 80px 16px;
+        }
+
+        .marquee {
+            background: rgba(0, 0, 0, 0.85);
+            border-bottom: 0.5px solid rgba(255, 217, 102, 0.3);
+            padding: 6px 0;
+            overflow: hidden;
+            white-space: nowrap;
+            margin-bottom: 12px;
+        }
+        .marquee-content {
+            display: inline-block;
+            animation: scroll 32s linear infinite;
+            font-size: 0.65rem;
+            color: #FFD966;
+        }
+        .marquee-content span {
+            margin-right: 36px;
+        }
+        .marquee-content i {
+            margin-right: 4px;
+            color: #30D158;
+        }
+        @keyframes scroll {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 16px;
+        }
+        .logo h1 {
+            font-size: 1.5rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, #FFD966, #007AFF);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+        }
+        .logo p {
+            font-size: 0.55rem;
+            color: #6b6b70;
+            margin-top: 2px;
+        }
+        .live {
+            background: rgba(255, 217, 102, 0.12);
+            padding: 4px 10px;
+            border-radius: 30px;
+            font-size: 0.55rem;
+            font-weight: 600;
+            color: #FFD966;
+            border: 0.5px solid rgba(255, 217, 102, 0.25);
+        }
+        .live i {
+            font-size: 0.4rem;
+            margin-right: 4px;
+            color: #30D158;
+        }
+
+        .balance-card {
+            background: linear-gradient(135deg, #121215, #08080a);
+            border-radius: 28px;
+            padding: 18px 20px;
+            margin-bottom: 16px;
+            border: 0.5px solid rgba(255, 217, 102, 0.3);
+        }
+        .balance-header {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.6rem;
+            color: #8e8e93;
+            margin-bottom: 10px;
+        }
+        .balance-number {
+            font-size: 2.2rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            line-height: 1.2;
+        }
+        .balance-number .currency-unit {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: #FFD966;
+            margin-left: 4px;
+        }
+        .balance-footer {
+            font-size: 0.55rem;
+            color: #6b6b70;
+            margin-top: 10px;
+            padding-top: 8px;
+            border-top: 0.5px solid rgba(255, 255, 255, 0.06);
+        }
+
+        .search-box {
+            background: rgba(28, 28, 30, 0.65);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            display: flex;
+            margin-bottom: 20px;
+            border: 0.5px solid rgba(255, 255, 255, 0.08);
+            overflow: hidden;
+        }
+        .search-box input {
+            flex: 1;
+            background: transparent;
+            border: none;
+            padding: 13px 18px;
+            color: white;
+            font-size: 0.85rem;
+            outline: none;
+        }
+        .search-box input::placeholder {
+            color: #6c6c70;
+        }
+        .search-box button {
+            background: #FFD966;
+            border: none;
+            border-radius: 28px;
+            padding: 0 22px;
+            margin: 4px;
+            font-weight: 700;
+            font-size: 0.8rem;
+            color: #000;
+            cursor: pointer;
+        }
+        .search-box button:active {
+            transform: scale(0.96);
+        }
+
+        .section-title {
+            font-size: 0.72rem;
+            font-weight: 700;
+            margin: 12px 0 12px 4px;
+            color: #FFD966;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .grid-8 {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .cat-card {
+            background: rgba(28, 28, 30, 0.7);
+            backdrop-filter: blur(10px);
+            border-radius: 18px;
+            padding: 10px 4px;
+            text-align: center;
+            border: 0.5px solid rgba(255, 217, 102, 0.2);
+            cursor: pointer;
+        }
+        .cat-card:active {
+            transform: scale(0.96);
+        }
+        .cat-card i {
+            font-size: 1.2rem;
+            color: #FFD966;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .cat-card .name {
+            font-size: 0.6rem;
+            font-weight: 600;
+        }
+        .cat-card .sub {
+            font-size: 0.45rem;
+            color: #8e8e93;
+            margin-top: 2px;
+        }
+
+        .two-columns {
+            display: flex;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .info-panel {
+            flex: 1;
+            background: rgba(28, 28, 30, 0.5);
+            backdrop-filter: blur(10px);
+            border-radius: 22px;
+            padding: 12px;
+            border: 0.5px solid rgba(255, 255, 255, 0.06);
+        }
+        .panel-header {
+            font-size: 0.62rem;
+            font-weight: 700;
+            color: #FFD966;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .news-item {
+            font-size: 0.6rem;
+            padding: 6px 0;
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            gap: 8px;
+            align-items: flex-start;
+        }
+        .news-item:last-child {
+            border-bottom: none;
+        }
+        .news-dot {
+            color: #FFD966;
+            font-size: 0.35rem;
+            margin-top: 4px;
+        }
+        .order-item {
+            font-size: 0.6rem;
+            padding: 7px 0;
+            border-bottom: 0.5px solid rgba(255, 255, 255, 0.05);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .order-item:last-child {
+            border-bottom: none;
+        }
+        .order-title {
+            font-weight: 500;
+        }
+        .order-badge {
+            font-size: 0.5rem;
+            padding: 2px 8px;
+            border-radius: 20px;
+            background: rgba(255, 217, 102, 0.15);
+            color: #FFD966;
+        }
+        .badge-penalty {
+            background: rgba(255, 59, 48, 0.2);
+            color: #FF3B30;
+        }
+        .badge-success {
+            background: rgba(48, 209, 88, 0.2);
+            color: #30D158;
+        }
+
+        .service-bar {
+            background: rgba(255, 217, 102, 0.08);
+            border-radius: 28px;
+            padding: 10px 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+        .service-info {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        .service-info i {
+            font-size: 1.2rem;
+            color: #FFD966;
+        }
+        .service-info span {
+            font-size: 0.7rem;
+            font-weight: 500;
+        }
+        .tg-btn {
+            background: #FFD966;
+            border: none;
+            border-radius: 30px;
+            padding: 6px 18px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #000;
+            cursor: pointer;
+            transition: 0.1s;
+        }
+        .tg-btn:active {
+            transform: scale(0.96);
+        }
+        a {
+            text-decoration: none;
+        }
+
+        .quick-rules {
+            display: flex;
+            justify-content: space-between;
+            gap: 8px;
+        }
+        .rule-tag {
+            flex: 1;
+            background: rgba(28, 28, 30, 0.4);
+            border-radius: 24px;
+            padding: 6px 0;
+            text-align: center;
+            font-size: 0.55rem;
+            color: #aaa;
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(10, 10, 12, 0.96);
+            backdrop-filter: blur(20px);
+            border-top: 0.5px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 20px 12px;
+            max-width: 420px;
+            margin: 0 auto;
+            width: 100%;
+        }
+        .nav-item {
+            background: transparent;
+            border: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2px;
+            color: #6c6c70;
+            font-size: 0.55rem;
+            padding: 6px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+        }
+        .nav-item i {
+            font-size: 1.2rem;
+        }
+        .nav-item.active {
+            background: #FFD966;
+            color: #000;
+        }
+
+        .modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            backdrop-filter: blur(12px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+            visibility: hidden;
+            opacity: 0;
+            transition: 0.15s;
+        }
+        .modal.show {
+            visibility: visible;
+            opacity: 1;
+        }
+        .modal-card {
+            background: #1c1c1e;
+            width: 86%;
+            max-width: 320px;
+            border-radius: 36px;
+            padding: 24px;
+            border: 1px solid rgba(255, 217, 102, 0.4);
+        }
+        .modal-card h3 {
+            font-size: 1.2rem;
+            color: #FFD966;
+            margin-bottom: 14px;
+            word-break: break-word;
+        }
+        .modal-card p {
+            font-size: 0.75rem;
+            line-height: 1.5;
+            color: #ccc;
+            white-space: pre-line;
+            margin-bottom: 22px;
+        }
+        .modal-close {
+            background: #FFD966;
+            width: 100%;
+            border: none;
+            padding: 12px;
+            border-radius: 30px;
+            font-weight: 700;
+            color: #000;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+<div class="app">
+    <div class="marquee">
+        <div class="marquee-content" id="marqueeContent"></div>
+    </div>
+
+    <div class="header">
+        <div class="logo">
+            <h1>西极协议</h1>
+            <p>八门铁律 · 链上仲裁</p>
+        </div>
+        <div class="live"><i class="fas fa-circle"></i> 实时</div>
+    </div>
+
+    <div class="balance-card">
+        <div class="balance-header">
+            <span>📊 托管总资产</span>
+            <span><i class="fas fa-gavel"></i> 西极金库</span>
+        </div>
+        <div class="balance-number" id="balanceNum">989,234.67<span class="currency-unit">USDT</span></div>
+        <div class="balance-footer"><i class="fas fa-id-card"></i> UID: <span id="uidSpan">7780788725</span> · 信用评级 SSS</div>
+    </div>
+
+    <div class="search-box">
+        <input type="text" id="searchUid" placeholder="输入对方UID查黑名单/信誉">
+        <button id="searchBtn">照妖镜</button>
+    </div>
+
+    <div class="section-title"><i class="fas fa-shield-alt"></i> 八门铁律 · 质押即护法</div>
+
+    <div class="grid-8" id="categoryGrid"></div>
+
+    <div class="two-columns">
+        <div class="info-panel">
+            <div class="panel-header"><i class="fas fa-bolt"></i> 西极快讯</div>
+            <div id="newsList"></div>
+        </div>
+        <div class="info-panel">
+            <div class="panel-header"><i class="fas fa-receipt"></i> 鉴证簿</div>
+            <div id="orderList"></div>
+        </div>
+    </div>
+
+    <!-- 客服栏 - 已添加 Telegram 跳转链接 -->
+    <div class="service-bar">
+        <div class="service-info">
+            <i class="fab fa-telegram-plane"></i>
+            <span>西极法殿 · 7x24仲裁</span>
+        </div>
+        <a href="https://t.me/X_JY_Bot" target="_blank" style="text-decoration: none;">
+            <button class="tg-btn">
+                <i class="fab fa-telegram"></i> 联系客服
+            </button>
+        </a>
+    </div>
+
+    <div class="quick-rules">
+        <div class="rule-tag">⚖️ 仲裁 &lt;24h</div>
+        <div class="rule-tag">🔒 多签冷钱包</div>
+        <div class="rule-tag">📢 黑名单公示</div>
+    </div>
+</div>
+
+<div class="bottom-nav">
+    <button class="nav-item active" data-tab="home"><i class="fas fa-home"></i><span>西极台</span></button>
+    <button class="nav-item" data-tab="orders"><i class="fas fa-receipt"></i><span>鉴证簿</span></button>
+    <button class="nav-item" data-tab="law"><i class="fas fa-gavel"></i><span>法殿</span></button>
+</div>
+
+<div class="modal" id="ruleModal">
+    <div class="modal-card">
+        <h3 id="modalTitle">西极戒律</h3>
+        <p id="modalText"></p>
+        <button class="modal-close" id="closeModal">奉行铁律</button>
+    </div>
+</div>
+
+<script>
+// ===================== 配置区 =====================
+const SERVER_IP = "38.90.18.135";
+const API_URL = `http://${SERVER_IP}:8000/api/v1/user_info`;
+
+// ===================== 八门规则库 =====================
+const rules = {
+    service: { name: "服务类", text: "【服务类】\n📌 最低质押：500 USDT\n💰 服务费率：5%\n⚔️ 核心规则：查档/搭建/美工须备案，交付不符或超时，押金划扣补偿买方。" },
+    cooperation: { name: "合作类", text: "【合作类】\n📌 最低质押：500 USDT\n💰 服务费率：5%\n⚔️ 核心规则：租号/代聊/手机口须实时在线，脱机/失联即扣保证金。" },
+    funds: { name: "资金类", text: "【资金类】\n📌 最低质押：1000 USDT\n💰 服务费率：1.5%\n⚔️ 核心规则：收款/承兑秒级清算，黑资假U入场封杀没收。" },
+    trade: { name: "买卖类", text: "【买卖类】\n📌 最低质押：300 USDT\n💰 服务费率：3%\n⚔️ 核心规则：假一赔三，换绑成功即放款，西极先行垫付。" },
+    traffic: { name: "引流类", text: "【引流类】\n📌 最低质押：800 USDT\n💰 服务费率：10%\n⚔️ 核心规则：严打假量死粉，分批放款，投诉超20%扣全部押金。" },
+    game: { name: "游戏类", text: "【游戏类】\n📌 最低质押：1000 USDT\n💰 服务费率：5%\n⚔️ 核心规则：哈希校验，输赢即时结算，大额波动人工核验。" },
+    card: { name: "卡商类", text: "【卡商类】\n📌 最低质押：2000 USDT\n💰 服务费率：6%\n⚔️ 核心规则：保时承诺，死卡按比例退款，跑路者全网终身追偿。" },
+    other: { name: "其他类", text: "【其他类】\n📌 最低质押：500 USDT\n💰 服务费率：5%\n⚔️ 核心规则：一事一议，遵守西极通用担保法。" }
+};
+
+const categories = [
+    { id: "service", icon: "fas fa-brush", name: "服务类", sub: "查档/美工" },
+    { id: "cooperation", icon: "fas fa-handshake", name: "合作类", sub: "租号/代聊" },
+    { id: "funds", icon: "fas fa-coins", name: "资金类", sub: "承兑/秒结" },
+    { id: "trade", icon: "fas fa-exchange-alt", name: "买卖类", sub: "账号/垫付" },
+    { id: "traffic", icon: "fas fa-chart-line", name: "引流类", sub: "真粉/假量" },
+    { id: "game", icon: "fas fa-gamepad", name: "游戏类", sub: "点数/校验" },
+    { id: "card", icon: "fas fa-id-card", name: "卡商类", sub: "保时/赔付" },
+    { id: "other", icon: "fas fa-ellipsis-h", name: "其他类", sub: "一事一议" }
+];
+
+// 余额数据（98万起步，会真实波动）
+let currentBalance = 989234.67;
+
+const newsData = [
+    "🏆 UID 8210** 资金类完成 150,000 U",
+    "⚠️ UID 7953** 引流类违规，8,000 U划扣",
+    "🔒 UID 4421** 卡商违约，20,000 U冻结",
+    "✅ UID 3378** 游戏类放款 125,000 U",
+    "⚡ 今日拦截黑资 43,000 USDT"
+];
+
+const ordersData = [
+    { title: "资金类 · 承兑", amount: "150,000 U", status: "已完成", type: "success" },
+    { title: "卡商类 · 违约", amount: "20,000 U", status: "扣款", type: "penalty" },
+    { title: "引流类 · 假量", amount: "8,000 U", status: "划扣", type: "penalty" },
+    { title: "买卖类 · 垫付", amount: "35,000 U", status: "成功", type: "success" }
+];
+
+// ===================== 渲染函数 =====================
+function renderCategories() {
+    const grid = document.getElementById('categoryGrid');
+    grid.innerHTML = categories.map(c => `
+        <div class="cat-card" data-id="${c.id}">
+            <i class="${c.icon}"></i>
+            <div class="name">${c.name}</div>
+            <div class="sub">${c.sub}</div>
+        </div>
+    `).join('');
+    document.querySelectorAll('.cat-card').forEach(card => {
+        card.addEventListener('click', () => {
+            const id = card.getAttribute('data-id');
+            if (rules[id]) showRuleModal(rules[id].name, rules[id].text);
+        });
+    });
+}
+
+function renderNews() {
+    const container = document.getElementById('newsList');
+    container.innerHTML = newsData.slice(0, 3).map(item => `
+        <div class="news-item">
+            <div class="news-dot"><i class="fas fa-circle"></i></div>
+            <div>${item}</div>
+        </div>
+    `).join('');
+}
+
+function renderOrders() {
+    const container = document.getElementById('orderList');
+    container.innerHTML = ordersData.slice(0, 3).map(o => `
+        <div class="order-item">
+            <div class="order-title">${o.title}</div>
+            <div class="order-badge ${o.type === 'penalty' ? 'badge-penalty' : 'badge-success'}">${o.status}</div>
+        </div>
+    `).join('');
+}
+
+function initMarquee() {
+    const marqueeItems = [
+        "🏆 UID 8210** 资金类完成 150,000 U",
+        "⚠️ UID 7953** 引流类违规，8,000 U划扣",
+        "🔒 UID 4421** 卡商违约，20,000 U冻结",
+        "✅ UID 3378** 游戏类放款 125,000 U",
+        "⚡ 今日拦截黑资 43,000 USDT"
+    ];
+    const container = document.getElementById('marqueeContent');
+    let html = '';
+    marqueeItems.forEach(item => { html += `<span><i class="fas fa-bolt"></i> ${item}</span>`; });
+    container.innerHTML = html + html;
+}
+
+// 余额显示函数（带千位分隔符）
+function updateBalanceDisplay(value) {
+    const elem = document.getElementById('balanceNum');
+    if (elem) {
+        elem.innerHTML = value.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '<span class="currency-unit">USDT</span>';
+    }
+}
+
+// ===================== 核心：真实波动函数 =====================
+function randomFluctuation() {
+    let rand = Math.random();
+    let delta = 0;
+    let changeDesc = "";
+    
+    if (rand < 0.65) {
+        // 小波动：几百到几千
+        delta = (Math.random() - 0.5) * 5000;
+        changeDesc = "小额波动";
+    } else if (rand < 0.88) {
+        // 中波动：1万到6万
+        delta = (Math.random() - 0.5) * 60000;
+        changeDesc = "中额波动";
+    } else {
+        // 大波动：5万到18万
+        delta = (Math.random() - 0.5) * 180000;
+        changeDesc = "大额波动";
+    }
+    
+    let newVal = currentBalance + delta;
+    // 保证余额在合理范围 10万 ~ 300万
+    newVal = Math.min(3000000, Math.max(100000, parseFloat(newVal.toFixed(2))));
+    
+    // 控制台输出波动日志（方便观察）
+    console.log(`${changeDesc}: ${delta > 0 ? '+' : ''}${delta.toFixed(2)} USDT → 新余额: ${newVal.toLocaleString()} USDT`);
+    
+    // 更新显示
+    const elem = document.getElementById('balanceNum');
+    if (elem) {
+        elem.innerHTML = newVal.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '<span class="currency-unit">USDT</span>';
+    }
+    currentBalance = newVal;
+}
+
+// 规则弹窗
+function showRuleModal(title, text) {
+    const modal = document.getElementById('ruleModal');
+    document.getElementById('modalTitle').innerText = title;
+    document.getElementById('modalText').innerText = text;
+    modal.classList.add('show');
+}
+
+// ===================== 照妖镜对接后端 =====================
+async function searchUser() {
+    const uid = document.getElementById('searchUid').value.trim();
+    const modal = document.getElementById('ruleModal');
+    const titleEl = document.getElementById('modalTitle');
+    const textEl = document.getElementById('modalText');
+    
+    if (!uid) {
+        showRuleModal("提示", "请输入对方UID");
+        return;
+    }
+    
+    modal.classList.add('show');
+    titleEl.innerHTML = '<i class="fas fa-spinner fa-pulse"></i> 正在接入西极法殿...';
+    textEl.innerText = '查询中，请稍候';
+    
+    try {
+        const response = await fetch(`${API_URL}?uid=${uid}`, {
+            method: 'GET',
+            headers: { 'Accept': 'application/json' }
+        });
+        
+        const result = await response.json();
+        
+        if (result.status === "success" && result.data) {
+            const d = result.data;
+            titleEl.innerHTML = `<span style="color:#FFD966">${d.tag || '合规用户'} · ${uid}</span>`;
+            textEl.innerHTML = `💰 可用余额：${d.balance} USDT\n🔒 质押金额：${d.deposit} USDT\n⭐ 信用评级：${d.level}\n📊 信誉分：${d.credit || '85'}`;
+        } else {
+            titleEl.innerHTML = `<span style="color:#FF3B30">🚨 风险警报</span>`;
+            textEl.innerHTML = `<b>UID ${uid}</b>\n\n${result.msg || '该用户未在西极协议备案，请谨慎交易！'}`;
+        }
+    } catch (error) {
+        titleEl.innerHTML = `<span style="color:#FF3B30">⚠️ 连接失败</span>`;
+        textEl.innerHTML = `无法连接到西极服务器\n\n请检查：\n1. 服务器IP是否正确\n2. 8000端口是否开放\n3. 后端服务是否运行\n\n当前配置IP: ${SERVER_IP}`;
+    }
+}
+
+// Tab切换
+function switchTab(tab) {
+    document.querySelectorAll('.nav-item').forEach(btn => btn.classList.remove('active'));
+    document.querySelector(`.nav-item[data-tab="${tab}"]`).classList.add('active');
+    
+    if (tab === 'home') {
+        document.querySelectorAll('.balance-card, .search-box, .section-title, .grid-8, .two-columns, .service-bar, .quick-rules').forEach(el => {
+            if (el) el.style.display = '';
+        });
+    } else if (tab === 'orders') {
+        document.querySelectorAll('.balance-card, .search-box, .section-title, .grid-8, .service-bar, .quick-rules').forEach(el => {
+            if (el) el.style.display = 'none';
+        });
+        document.querySelector('.two-columns').style.display = 'flex';
+        const orderPanel = document.getElementById('orderList');
+        if (orderPanel) {
+            orderPanel.innerHTML = ordersData.map(o => `
+                <div class="order-item">
+                    <div class="order-title">${o.title} ${o.amount}</div>
+                    <div class="order-badge ${o.type === 'penalty' ? 'badge-penalty' : 'badge-success'}">${o.status}</div>
+                </div>
+            `).join('');
+        }
+    } else if (tab === 'law') {
+        document.querySelectorAll('.balance-card, .search-box, .section-title, .grid-8, .two-columns, .quick-rules').forEach(el => {
+            if (el) el.style.display = 'none';
+        });
+        document.querySelector('.service-bar').style.display = 'flex';
+    }
+}
+
+// 事件绑定
+function bindEvents() {
+    document.getElementById('searchBtn').addEventListener('click', searchUser);
+    document.getElementById('closeModal').addEventListener('click', () => {
+        document.getElementById('ruleModal').classList.remove('show');
+    });
+    document.getElementById('ruleModal').addEventListener('click', (e) => {
+        if (e.target.classList.contains('modal')) document.getElementById('ruleModal').classList.remove('show');
+    });
+    document.querySelectorAll('.nav-item').forEach(btn => {
+        btn.addEventListener('click', () => switchTab(btn.getAttribute('data-tab')));
+    });
+    document.getElementById('searchUid').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') searchUser();
+    });
+}
+
+// 初始化
+function init() {
+    renderCategories();
+    renderNews();
+    renderOrders();
+    initMarquee();
+    bindEvents();
+    updateBalanceDisplay(currentBalance);
+    document.getElementById('uidSpan').innerText = "7780788725";
+    switchTab('home');
+    
+    // 启动余额波动，每8秒变化一次
+    setInterval(randomFluctuation, 8000);
+    
+    console.log("✅ 西极协议前端已启动 | 余额真实波动模式已开启");
+    console.log(`📡 API地址: ${API_URL}`);
+}
+
+init();
+</script>
+</body>
+</html>
